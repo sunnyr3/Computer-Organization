@@ -1,0 +1,223 @@
+[10/30/2018]
+
+THIS WEEK'S LABS (WEDNESDAY 10/31)
+-- Catch-up Lab -- no new lab assignment
+-- You can make up any lab(s) you like, having them checked off
+
+-------------------------------------------------------------------------
+
+Homework 4 has been revised and posted
+
+
+n = -100;
+
+ 00..01100100    <== 64 + 32 + 4 = 100
+             two
+
+ 11..10011100    <== -100
+             two
+
+For division in Homework 4, we will use a simplification
+ only when the divisor is an exact power of 2, as in:
+
+bash$ cat example5.src
+n = 100;
+b = n / 32;         # 3
+bash$ ./a.out example5.src
+# n = 100;
+li $s0,100
+# b = n / 32;
+srl $s1,$s0,5
+
+wait, what about if n is negative (e.g., n = -100;)?
+-- we could sign-extend or negate the operand before/after
+-- we could also use a Shift Right Arithmetic (sra) instruction
+
+   e.g., divide -100 / 32
+
+ 1111 1111 1111 1111 1111 1111 1001 1100    <== -100
+                                        two
+
+ sra $s0,5
+
+ logical shift right (by 5):
+ 0000 0111 1111 1111 1111 1111 1111 1100
+  <--- ^                                two
+ sign-extend:
+ 1111 1111 1111 1111 1111 1111 1111 1100    <== -4 ?????
+                                        two
+
+Wait!
+The sra instruction does not quite handle division of a negative value!
+
+The actual result here is the result rounded down!
+-- and since we're using negative values, rounding down
+    changes the expected -3 to -4 in the above example   :-(
+
+Okay, let's try this again....if the divisor is a power of 2, then...
+
+*** Only use the right-shift approach if the dividend (first operand)
+***  is non-negative -- we'll need to implement this logic in MIPS
+
+bash$ cat example5.src
+n = 100;
+b = n / 32;
+bash$ ./a.out example5.src
+# n = 100;
+li $s0,100
+# b = n / 32;
+bltz $s0,L0
+srl $s1,$s0,5
+j L1
+L0:
+li $t0,32
+div $s0,$t0
+mflo $s1
+L1:
+
+^^^
+This code will properly handle both positive and negative values of n
+
+
+
+
+bash$ cat example6.src
+n = 100;
+b = n / 33;
+bash$ ./a.out example6.src
+# n = 100;
+li $s0,100
+# b = n / 33;
+li $t0,33
+div $s0,$t0
+mflo $s1
+
+
+
+
+division by zero:
+
+n = 100;
+b = n / 0;
+        ^
+     this should generate an error in your C code
+     fprintf( stderr, "Division by zero error\n" );
+
+
+n = 100;
+q = 0;
+b = n / q;
+-- in this example, just generate MIPS code
+
+
+-------------------------------------------------------------------------
+
+In the 1-Bit ALU (slide 118 of ch3a notes):
+
+To calculate a AND b:
+ a: 0 or 1
+ b: 0 or 1                             Result: a AND b
+ Binvert: 0                            CarryOut: 0 or 1 (don't care)
+ CarryIn: 0 or 1 (don't care)
+ Operation: 00   <=== change this to 01 to get a OR b as Result
+
+To calculate a + b (addition):
+ a: 0 or 1
+ b: 0 or 1                             Result: a + b
+ Binvert: 0                            CarryOut: MSB[a + b + CarryIn]
+ CarryIn: 0 or 1
+ Operation: 10
+
+To calculate a - b (a + -b):
+ a: 0 or 1
+ b: 0 or 1                             Result: a - b
+ Binvert: 1                            CarryOut: ???
+ CarryIn: 1 if LSB; 0 or 1 otherwise
+ Operation: 10
+
+What about adding NOT functionality?
+                  _
+  NOT X <==> 0 OR X
+        _        _
+ a  b | b | a OR b
+------|---|--------
+ 0  0 | 1 |   1
+ 0  1 | 0 |   0
+
+ a: 0
+ b: input X (0 or 1)
+ Binvert: 1
+ CarryIn: 0
+ Operation: 10 (add)   _
+ Result: NOT X   (a OR b)
+
+                       ________
+ How could we add NOR: (a OR b) to our 1-bit ALU?
+
+ -- Use DeMorgan's theorem here:
+   _______     _     _
+   (a + b)  =  a AND b
+
+ -- add an Ainvert control bit and an inverter on input a
+
+   a: 0 or 1                              ________
+   b: 0 or 1                      Result: (a OR b) <==> a NOR b
+   Ainvert: 1
+   Binvert: 1                     CarryOut: 0 or 1 (don't care)
+   CarryIn: 0 or 1 (don't care)
+   Operation: 00 (logical AND)
+
+                        _________
+ How could we add NAND: (a AND b) to our 1-bit ALU?
+
+
+-------------------------------------------------------------------------
+
+ How can we expand our ALU to support slt instructions?
+
+ slt $t0,$t1,$t2   # if $t1 < $t2,             set $t0 to 1, otherwise 0
+                   # if $t1 - $t2 is negative, set $t0 to 1, otherwise 0
+
+                                                          Result0
+                                                             |
+ for 32-bit inputs,                                          v
+  slt result should be 0000 0000 0000 0000 0000 0000 0000 0001  (true)
+                    or 0000 0000 0000 0000 0000 0000 0000 0000  (false)
+
+  if we subtract $t1 - $t2 and the value is negative, it will look like this:
+
+                       1??? ???? ???? ???? ???? ???? ???? ????
+                       ^
+                     MSB indicates this value is negative
+
+ When the operation is 11 (or 3), the result is always the Less input
+
+ The Less input is 0 for all bits except for the LSB, in which case
+  Less is the sign bit from the MSB
+
+
+-------------------------------------------------------------------------
+
+Carry In Analysis
+       _            _            __
+ Co =  A B Ci  +  A B Ci  +  A B Ci  +  A B Ci
+
+ \ AB
+Ci\ 00 01 11 10
+   +--+--+--+--+
+ 0 | 0| 0| 1| 0|
+   +--+--+--+--+
+ 1 | 0| 1| 1| 1|
+   +--+--+--+--+
+
+ reduces to:  Co =  B Ci  +  A Ci  +  A B
+
+
+-------------------------------------------------------------------------
+
+Starting Friday, Professor Kuzmin will be lecturing,
+ essentially starting at Section 4.5 Pipelining
+
+Everything else will remain the same
+ (schedule/format of labs, homeworks, quizzes, office hours, etc.)
+

@@ -1,0 +1,62 @@
+CSCI 2500 QUIZ 2 SOLUTIONS [09/28/2018]
+-----------------------------------------------------------------------------
+Question 1 (three versions)
+SOLUTION: (e) vi is orders of magnitude better than emacs
+-----------------------------------------------------------------------------
+Question 2 (three versions)
+SOLUTION: int snapchat( int x, int * y );
+-----------------------------------------------------------------------------
+Question 3 (three versions)
+SOLUTION: lw $s1,16($s5)
+-----------------------------------------------------------------------------
+Question 4
+SOLUTION:
+[answers will vary here; 3pts per line of code]
+[-2pts for each extra line of code]
+[incorrect if calculations shown in C are not performed (e.g., z = 256)]
+[incorrect if instructions other than add or sub are used (e.g., sll)]
+[okay if different registers are used]
+	li $s1,128
+	add $s2,$s1,$s1
+	sub $t0,$s1,$s2
+	add $t1,$s2,$s1
+	sub $s0,$t0,$t1
+-----------------------------------------------------------------------------
+Question 5 (three versions)
+
+[subtract 1pt for each incorrect/missing character or incorrect '\n']
+
+"007ABCDEFGHIJ789" version:
+EXACT OUTPUT:
+2pts   3pts each   4pts
+ |        |||       |
+ v  vvvvvvvvvvvvvv  vv
+ 8-[ A C E G I 7 9]-42
+  ^^              ^^
+  |               |
+ 2pts            1pt
+
+"007JKLMNOPQRS678" version:
+EXACT OUTPUT:
+ 8-[ J L N P R 6 8]-42
+
+"007QRSTUVWXYZ567" version:
+EXACT OUTPUT:
+ 8-[ Q S U W Y 5 7]-42
+-----------------------------------------------------------------------------
+Question 6
+EXACTLY FOUR ERRORS [5pts per each error identified; 5pts for each fix]:
+
+BUG #1: calloc() call does not allocate enough memory
+FIX #1: should be calloc( count + 1, ... );
+
+BUG #2: if ( *j = *i ) is not checking to see if *j is equal to *i
+FIX #2: should be if ( *j == *i )
+
+BUG #3: k is never incremented in the second nested loop
+FIX #3: should be: *k++ = *i
+        or { *k = *i; k++; }
+
+BUG #4: return *result; incorrectly dereferences result
+FIX #4: should be return result;
+-----------------------------------------------------------------------------

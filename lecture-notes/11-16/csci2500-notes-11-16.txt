@@ -1,0 +1,20 @@
+[11/16/2018]
+
+-- 2 pm office hours today are canceled
+-- Next week: Monday 10AM office hours, then 12PM class; Tuesday 2 pm office hours (AE 112), then Thanksgiving break
+
+-------------------------------------------------------------------------
+
+32 bits wide addresses, we address bytes
+2^32 bytes of addressable space
+64 KiB: 1 KiB = 2^10; 64 = 2^6. 64 KiB = 2^16 bytes
+
+Memory address
+XXXX XXXX XXXX XXXX | XXXX XXXX XXXX XXXX
+				tag								index
+
+Same but performing all computations in the number of words instead of the number of bytes
+2^30 words
+64 KiB (bytes) => 64/4 = 16 KiW (words). 1 KiB = 2^10; 16 = 2^4; 16 KiW = 2^14 words
+XXXX XXXX XXXX XXXX   XX XXXX XXXX XXXX
+        tag         |      index

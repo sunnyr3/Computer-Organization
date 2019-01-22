@@ -1,0 +1,210 @@
+[10/16/2018]
+
+Homework #3 due date extended to 11:59PM on Friday 10/19
+ (i.e., Submitty will be available by 11:59PM tonight)
+
+Rainbow grades will be updated this week
+
+-------------------------------------------------------------------------
+
+Quiz 3 Question 3
+
+A functionally complete set is a minimal set of operators that
+ can be used to represent any possible Boolean expression.
+  We know from class that AND, OR, and NOT form
+   a functionally complete set.
+
+(a) Do the two operators NOR and NAND form a functionally complete set
+    (yes or no)?
+
+       YES
+
+(b) If "yes," describe how.
+
+NOR is a functionally complete set
+      _
+  X = A
+     _
+ A | A | A NOR A
+---|---|---------
+ 0 | 1 | 1
+ 1 | 0 | 0
+      _
+  X = A = A NOR A
+
+
+
+  X = A OR B
+
+ A  B | A NOR B | (A NOR B) NOR (A NOR B)
+------|---------|------------------------
+ 0  0 | 1       |  0
+ 0  1 | 0       |  1
+ 1  0 | 0       |  1
+ 1  1 | 0       |  1
+
+  X = A OR B = (A NOR B) NOR (A NOR B)
+
+
+
+  X = A AND B
+
+ A  B | A NOR A | B NOR B | (A NOR A) NOR (B NOR B)
+------|---------|---------|------------------------
+ 0  0 | 1       | 1       |  0
+ 0  1 | 1       | 0       |  0
+ 1  0 | 0       | 1       |  0
+ 1  1 | 0       | 0       |  1
+
+  X = A AND B = (A NOR A) NOR (B NOR B)
+
+
+
+
+Quiz 2 Question 2
+
+      ________     ________
+  X = (A OR B) AND (A OR C)
+         ________     ________
+ A B C | (A OR B) AND (A OR C)
+-------|-----------------------
+ 0 0 0 |  1
+ 0 0 1 |  0
+ 0 1 0 |  0
+ 0 1 1 |  0
+ 1 0 0 |  0
+ 1 0 1 |  0
+ 1 1 0 |  0
+ 1 1 1 |  0
+      _     _     _
+  X = A AND B AND C
+
+We cannot use a K-map for this example.....
+
+-------------------------------------------------------------------
+
+       _           _            _            _     _
+  X = (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+          _           _            _            _     _
+ A B C | (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+-------|-------------------------------------------------------
+ 0 0 0 |  0       _     _
+ 0 0 1 |  1  <== (A AND B AND C)
+                  _           _
+ 0 1 0 |  1  <== (A AND B AND C)
+ 0 1 1 |  0
+ 1 0 0 |  0             _
+ 1 0 1 |  1  <== (A AND B AND C)
+ 1 1 0 |  0
+ 1 1 1 |  0
+
+Can we simplify this further?
+
+K-map:
+
+  \ AB
+ C \ 00 01 11 10
+    +--+--+--+--+
+  0 | 0| 1| 0| 0|
+    +--+--+--+--+
+  1 | 1| 0| 0| 1|
+    +--+--+--+--+
+     ^^       ^^
+
+One reduction/merging:
+-- if B is 0 and C is 1, then A does not matter (can be 0 or 1)
+       _           _            _            _     _
+  X = (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+                                ^^^^^^^            ^^^^^^^
+       _           _      _
+  X = (A AND B AND C) OR (B AND C)
+
+
+-------------------------------------------------------------------
+             _                        _
+  X = (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+                _                        _
+ A B C | (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+-------|-------------------------------------------------------
+ 0 0 0 |  0
+ 0 0 1 |  0
+ 0 1 0 |  0              ==>  X = (A AND C) OR (A AND B)
+ 0 1 1 |  0
+ 1 0 0 |  0
+                        _
+ 1 0 1 |  1  <== (A AND B AND C)
+                              _
+ 1 1 0 |  1  <== (A AND B AND C)
+ 1 1 1 |  1  <== (A AND B AND C)
+
+K-map:
+
+ \ AB
+C \ 00 01 11 10
+   +--+--+--+--+
+  0| 0| 0| 1| 0|
+   +--+--+--+--+
+  1| 0| 0| 1| 1|
+   +--+--+--+--+
+
+Two reductions/mergings:
+-- if A is 1 and B is 1, then C does not matter (can be 0 or 1)
+             _                        _
+  X = (A AND B AND C) OR (A AND B AND C) OR (A AND B AND C)
+                          ^^^^^^^            ^^^^^^^
+             _
+  X = (A AND B AND C) OR (A AND B)
+
+-- if A is 1 and C is 1, then B does not matter (can be 0 or 1)
+
+  X = (A AND C) OR (A AND B)
+
+---------------------------------------------------------------------
+
+
+
+ X = (A AND B AND C AND D) OR (A AND B AND C AND D) OR (A AND B AND C AND D) OR (A AND B AND C AND D)
+
+ A B C D |  X
+---------|-----
+ 0 0 0 0 |  0
+ 0 0 0 1 |  0
+ 0 0 1 0 |  0
+ 0 0 1 1 |  0
+ 0 1 0 0 |  0
+ 0 1 0 1 |  0
+ 0 1 1 0 |  0
+ 0 1 1 1 |  0
+ 1 0 0 0 |  0
+ 1 0 0 1 |  0
+ 1 0 1 0 |  0
+ 1 0 1 1 |  0
+ 1 1 0 0 |  1
+ 1 1 0 1 |  1
+ 1 1 1 0 |  1
+ 1 1 1 1 |  1
+
+
+K-map:
+
+  \ AB
+CD \ 00 01 11 10
+    +--+--+--+--+
+  00| 0| 0| 1| 0|
+    +--+--+--+--+
+  01| 0| 0| 1| 0|
+    +--+--+--+--+
+  11| 0| 0| 1| 0|
+    +--+--+--+--+
+  10| 0| 0| 1| 0|
+    +--+--+--+--+
+           ^^
+
+One reduction/merging:
+-- if A is 1 and B is 1, then C and D do not matter (can be 0 or 1)
+
+                  _     _                  _                              _
+ X = (A AND B AND C AND D) OR (A AND B AND C AND D) OR (A AND B AND C AND D) OR (A AND B AND C AND D)
+
+ X = (A AND B)
+

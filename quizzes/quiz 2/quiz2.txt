@@ -1,0 +1,25 @@
+downcase:
+    # count
+    li $t0, 0
+    li $t1, 0x41
+    li $t2, 0x5a
+
+forloop:
+    beq $a0, $zero, return
+    lb $s0, 0($a0)
+    slt $t3, $t1, $s0
+    slt $t4, $s0, $t2
+    and $t4, $t4, $t3
+    bne $t4, $zero, down
+    add $a0, $a0, 4
+    j forloop
+
+down:
+    addi $t0, $t0, 1
+    addi $s0, $s0, 0x20
+    sb $s0, 0($a0)
+    jr $ra
+
+return:
+    add $v0, $zero, $t0
+    jr $ra

@@ -1,0 +1,3 @@
+page 20
+
+addi $s3, $s3, 4    -->   add an immediate number (4) to s3

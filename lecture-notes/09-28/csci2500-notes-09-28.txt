@@ -1,0 +1,57 @@
+[09/28/2018]
+
+Upcoming coding competition hosted by ACM-W (Tues 10/2 at 6PM)
+  http://www.cs.rpi.edu/~goldsd/terminal-at-RPI.pdf
+Application deadline is today:
+  https://terminal.c1games.com/competition/rpi-game-night?utm_source=C1
+
+-------------------------------------------------------------------------
+
+Quiz 1
+-- Grading is complete
+-- See Course Materials for Quiz 1 and Quiz 1 solutions
+
+Rainbow Grades -- give me about two weeks....
+
+-------------------------------------------------------------------------
+
+ 31     = 0000...011111
+   ten                 two
+
+ -31    = 1111...100001
+    ten                two
+
+
+ sll:     11111100       (equal to -4   )
+                  two                ten
+
+          11111000       (equal to -8   )
+                  two                ten
+
+-------------------------------------------------------------------------
+
+MIPS pseudo-instructions:
+
+  clear $t0       ==>   addu $t0,$zero,$zero  # in C:  t0 = 0;
+
+  move $t0,$s0    ==>   addiu $t0,$s0,$zero   # in C:  t0 = s0;
+
+  li $t0,Imm      ==>   ori $t0,$0,Imm        # in C:  t0 = Imm;
+
+  b L1            ==>   beq $zero,$zero,L1
+
+  ble $s0,$t0,L1  ==>   slt $at,$t0,$s0       # branch if less than or equal
+                        beq $at,$zero,L1
+
+  beqz $s0,L1     ==>   beq $s0,$zero,L1      # branch if zero
+
+  beq $s0,Imm,L1  ==>   ori $at,$zero,Imm     # branch if equal to immediate
+                        beq $s0,$at,L1
+
+  not $t0,$s0     ==>   nor $t0,$s0,$zero     # in C:  t0 = ~s0;
+
+  nop             ==>   sll $zero,$zero,0     # no operation 0x00000000
+
+
+
+

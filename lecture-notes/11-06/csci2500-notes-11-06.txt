@@ -1,0 +1,39 @@
+[11/06/2018]
+
+-- Homework 4 is due on Friday, 11/09
+
+-------------------------------------------------------------------------
+
+Quiz 5 is this Friday 11/09 -- coverage:
+-- Base conversion, including base 16, base 10, and base 2, as well as two's complement
+-- SOP, K-maps
+-- Integer and floating-point instructions/operations in MIPS (from HW4)
+-- Multiplexers, decoders, S-R latches (from Lab 08)
+-- Chapter 4 material on Datapath, in particular sections 4.1-4.4, including Figures 4.1, 4.2, 4.9, and 4.11
+-- Chapter 4 material on clocks, i.e., why do we need a clock?
+-- Chapter 4 material on Control, in particular section 4.4, including Figures 4.14 (Lab 09), 4.15, and 4.17
+-- Review the material, review the "Check Yourself" textbook problems and the textbook exercises at the end of the chapter
+
+-------------------------------------------------------------------------
+
+Example 1:
+lw  $t0,0($t0)
+add $t1,$t0,$t0
+
+  1   2   3   4   5   6   7   8   9  10  11  12
+ IF  ID  EX  M|  WB
+                \
+         IF  ID |EX MEM  WB
+         
+
+Example 2:
+add   $t1,$t0,$t0
+addi  $t2,$t0,#5
+addi  $t4,$t1,#5
+
+  1   2   3   4   5   6   7   8
+ IF  ID EX| MEM WB|
+     IF  ID \EX MEM 
+         IF  ID |EX
+     
+  

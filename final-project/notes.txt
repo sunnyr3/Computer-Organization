@@ -1,0 +1,3 @@
+1. use a vector to store pipeline instructions
+2. when reading the file and encounter a branch name (ex, loop:), use a map to store <branch_name, line number of instructions>
+3. 

@@ -1,0 +1,68 @@
+[10/23/2018]
+
+Rainbow grades was updated this morning
+-- Quiz 2 grading complete.....might not be in Rainbow Grades yet
+-- Homework 3 is included
+-- Stay tuned.................
+
+-------------------------------------------------------------------------
+
+Quiz 4 is this Friday 10/26 -- coverage:
+-- 25% MIPS (and C) focused on floating point instructions
+   and coprocessor 1
+-- 75% Logic Design, including Boolean expressions, K-maps,
+   logical gates, multiplexers, decoders, adders, ALU design,
+   the clock, S-R and D latches, base conversions (binary/decimal/hex),
+   floating-point IEEE 754-1985 format (encoding/decoding),
+   datapath/control/CPU design (Chapter 4, however far we get today)
+
+From the Discussion Forum:
+  "Quiz 4 will shift the focus from MIPS to the Logic Design
+   topics we've been looking at.  I'd say 25% MIPS (and C) and
+   75% on more recent material that we'll cover through and
+   including Monday 10/22 class."
+
+-------------------------------------------------------------------------
+
+   example instructions:
+
+           lw $t1,32($a0)
+
+           add $t3,$t2,$t1    opcode-reg1-reg2-reg3-...
+                              <-6b-> <5b> <5b> <5b>
+
+           bne $t3,$t4,LABEL1
+                   (LABEL1 is an offset)
+
+
+
+            lw $t1,-128($a0)   opcode-reg1-reg2-offset
+                               <-6b-> <5b> <5b> <16b->
+
+              add -128 to base address in $a0
+              first we sign-extend -128 (from 16 bits to 32 bits)
+
+              -128 in binary in 16 bits?
+
+                 0000 0000 1000 0000     +128
+                 1111 1111 0111 1111     flip bits and add 1
+                 1111 1111 1000 0000     -128
+
+              sign-extend from 16 bits to 32 bits:
+
+                 1111 1111 1111 1111 1111 1111 1000 0000     -128
+
+              then add to $a0, for example:
+
+                 1111 1111 1111 1111 1111 1111 1000 0000     -128
+              +  1010 0101 0101 1100 1111 0001 1111 1111   $a0 (e.g.)
+             ---------------------------------------------
+                 this sum is the target memory address
+
+
+
+         beq $s1,$s2,LABEL1  opcode-reg1-reg2-displacement (offset)
+                             <-6b-> <5b> <5b> <16b---------------->
+
+                          displacement tells us not byte offset,
+                            but instead tells us the instruction offset

@@ -1,0 +1,12 @@
+char		1 byte
+unsigned char	1
+signed char	1
+int		2 or 4
+unsigned int	2 or 4
+short 		2
+unsigned short	2
+long		4
+unsigned long	4
+float		4
+double		8
+long double	10

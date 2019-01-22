@@ -1,0 +1,28 @@
+[09/25/2018]
+
+Quiz 2 is in class this Friday 9/28
+-- No books, no notes, no crib sheet, also no cheating!
+-- Designed to be 25 minutes in length, starting at about 1:00PM
+    (you will have through 1:50PM if need be, so don't rush)
+-- Coverage: C programming (~75%), MIPS assembly programming (~25%),
+    reading/deciphering code, writing code, identifying bugs in code,
+     showing what's happening in memory, etc.
+
+Quiz 1
+-- Grading to be completed this week
+-- See Course Materials for Quiz 1 and Quiz 1 solutions
+
+Rainbow Grades -- give me about two weeks....
+
+-------------------------------------------------------------------------
+
+HINTS for getting SPIM installed from Linux:
+
+Try this:
+
+  bash# apt-get install spim
+
+Or:
+
+  bash$ sudo apt-get install spim
+

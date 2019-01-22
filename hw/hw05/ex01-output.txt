@@ -1,0 +1,38 @@
+START OF SIMULATION
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	.	.	.	.	.	.	.	.
+add $t2,$s0,$s5	.	.	.	.	.	.	.	.	.
+add $t4,$s3,70	.	.	.	.	.	.	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	.	.	.	.	.	.	.
+add $t2,$s0,$s5	.	IF	.	.	.	.	.	.	.
+add $t4,$s3,70	.	.	.	.	.	.	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	EX	.	.	.	.	.	.
+add $t2,$s0,$s5	.	IF	ID	.	.	.	.	.	.
+add $t4,$s3,70	.	.	IF	.	.	.	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	EX	MEM	.	.	.	.	.
+add $t2,$s0,$s5	.	IF	ID	EX	.	.	.	.	.
+add $t4,$s3,70	.	.	IF	ID	.	.	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	EX	MEM	WB	.	.	.	.
+add $t2,$s0,$s5	.	IF	ID	EX	MEM	.	.	.	.
+add $t4,$s3,70	.	.	IF	ID	EX	.	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	EX	MEM	WB	.	.	.	.
+add $t2,$s0,$s5	.	IF	ID	EX	MEM	WB	.	.	.
+add $t4,$s3,70	.	.	IF	ID	EX	MEM	.	.	.
+
+CPU Cycles ===>	1	2	3	4	5	6	7	8	9
+add $s1,$s0,$s0	IF	ID	EX	MEM	WB	.	.	.	.
+add $t2,$s0,$s5	.	IF	ID	EX	MEM	WB	.	.	.
+add $t4,$s3,70	.	.	IF	ID	EX	MEM	WB	.	.
+
+END OF SIMULATION

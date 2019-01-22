@@ -1,0 +1,115 @@
+[10/26/2018]
+
+Fall Open House is this Saturday 10/27 (9AM-2PM) in AE 214
+-- see my email to csug!
+
+-------------------------------------------------------------------------
+
+NEXT WEEK'S LABS WEDNESDAY 10/31
+-- Catch-up Lab -- no new lab assignment
+-- You can make up any lab(s) you like, having them checked off
+
+-------------------------------------------------------------------------
+
+Homework 4 has been posted
+
+-------------------------------------------------------------------------
+
+Rainbow grades has been fixed to show
+-- Quiz 1 and Quiz 2
+-- Homework 1 and Homework 3
+-- Labs 01 through 07
+
+-------------------------------------------------------------------------
+
+Quiz 3 Question 2:
+
+%%                      x               y
+%%
+%%                    _____           _____
+%%  A  B  C | A + B | A + B | A + C | A + C | x y |
+%%----------|-------|-------|-------|-------|-----|
+%%  0  0  0 |   0   |   1   |   0   |   1   |  1  |
+%%  0  0  1 |   0   |   1   |   1   |   0   |  0  |
+%%  0  1  0 |   1   |   0   |   0   |   1   |  0  |
+%%  0  1  1 |   1   |   0   |   1   |   0   |  0  |
+%%  1  0  0 |   1   |   0   |   1   |   0   |  0  |
+%%  1  0  1 |   1   |   0   |   1   |   0   |  0  |
+%%  1  1  0 |   1   |   0   |   1   |   0   |  0  |
+%%  1  1  1 |   1   |   0   |   1   |   0   |  0  |
+%%
+%%                _ _ _        _     _     _
+%%   reduces to:  A B C  <==>  A AND B AND C
+
+  _______     _     _
+  (A + B) ==> A AND B
+
+  _______     _     _
+  (A + C) ==> A AND C
+
+  _     _     _     _
+  A AND B AND A AND C
+
+-------------------------------------------------------------------------
+
+Quiz 4 Clarifications:
+
+(3) Input bits A, B, C, and D form a 4-digit binary number
+    with A as the most significant bit (MSB) and D as the
+    least significant bit (LSB):
+
+       ABCD
+       0011 ==> 3
+                 ten
+       1100 ==> 12
+                  ten
+
+(4) The given expression is in SOP form with AND implied:
+            _ _      _   _ _    _  _
+       F = ABCD + ABCD + ABCD + ABCD
+                 _           _      _   _ _    _  _
+       F = A AND B AND C AND D + ABCD + ABCD + ABCD
+           ^^^^^^^^^^^^^^^^^^^
+
+
+Quiz 4 EXTRA CREDIT:
+
+Below your name, write down three numbers:
+(a) first, how many control bits input into the ALU?
+(b) second, how many World Series games have the Red Sox won in 2018?
+(c) third, how many bits in a "nybble" (or "nibble")?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

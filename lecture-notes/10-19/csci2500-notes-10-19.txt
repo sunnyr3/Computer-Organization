@@ -1,0 +1,193 @@
+[10/19/2018]
+
+Homework #3 due 11:59PM Friday 10/19 (tonight!)
+
+Rainbow grades has been updated (but no Quiz 2 or 3 yet...)
+
+-------------------------------------------------------------------------
+
+Decode 100.0 (0x42c80000)
+
+ 0100 0010 1100 1000 0000 0000 0000 0000
+ +^^^^^^^^^^                            two
+  exponent
+
+  exponent: 10000101 ==> 128+4+1-127 ==> 6
+
+  fracton: 1.1001
+                 two
+
+
+                6
+  +1.1001    x 2  = +1100100    = 64 + 32 + 4 = 100
+         two                two
+
+
+Convert 57.75 to single-precision hexadecimal:
+
+                          -1    -2
+ 0.75 ==> 0.5 + 0.25 ==> 2   + 2   ==> 0.11
+                                           two
+
+ 57 ==> 32 + 16 + 8 + 1 ==> 111001
+                                  two
+
+  111001.11
+           two
+
+  1.1100111      normalized form
+  ^        two
+  implied
+
+
+ 0????????1100111
+ +
+               5
+  exponent is 2  = 128 + 4 - 127 = 5
+                   ^^^^^^^
+
+  exponent is 10000100
+              ^    ^
+             128   4
+
+ 0100001001100111
+ +^^^^^^^^
+  exponent
+
+ 0100 0010 0110 0111 0000 0000 0000 0000
+
+ 0x42670000
+
+
+
+e.g., 
+ 0x418438e4
+
+ 0100 0001 1000 0100 0011 1000 1110 0100
+ +^^^^^^^^^^                            two
+
+ exponent 128+2+1-127=4
+ fraction: 1.00001000011100011100100
+
+ 10000.1000011100011100100
+ ^     ^    ^
+ 16   0.5   2^-6
+
+  -1    -6    -7    -8    -12    -13    -14    -17
+ 2   + 2   + 2   + 2   + 2    + 2    + 2    + 2
+
+  16.
+ + 0.5
+ + 0.015625
+ + 0.0078125
+ + 0.00390625
+ + 0.000244140625
+ + 0.0001220703125
+ + 0.00006103515625
+ + 0.00000762939453125
+-----------------------
+  16.5277786...........
+
+
+
+
+
+What happens when A changes from 0 to 1?
+
+  Feedback  A | C
+ -------------|---
+      0     0 | 0
+      0     1 | 1
+      1     0 | 1
+      1     1 | 1
+
+
+
+We can use two inverters to form a static memory cell:
+
+              "1"
+   +--------------------------+
+   |                          |
+   |    |\          |\        |
+   |    | \   "0"   | \       |
+   +----|  )o-------|  )o-----+------> stored value "1"
+        | /         | /
+        |/          |/
+
+           these are NOT gates!
+
+
+To change the value that is stored, we need to both provide a
+ new value (e.g, "0") and temporarily break the feedback loop:
+
+                      remember
+                         +
+                          \
+            +-----------+  +-----------+
+     load   |                          |
+       +    |    |\          |\        |
+new   /     |    | \         | \       |
+-----+  +---+----|  )o-------|  )o-----+------> stored value
+value            | /         | /
+                 |/          |/
+
+
+
+		      remember
+                         +
+                          \
+            +-----------+  +-----------+
+     load   |                          |
+            |    |\          |\        |
+new  "0"    |    | \   "1"   | \       |
+-----+--+---+----|  )o-------|  )o-----+------> stored value "0"
+value            | /         | /
+                 |/          |/
+
+
+
+
+		      remember
+
+                       "0"
+            +-----------+--+-----------+
+     load   |                          |
+       +    |    |\          |\        |
+new   /     |    | \   "1"   | \       |
+-----+  +---+----|  )o-------|  )o-----+------> stored value "0"
+value            | /         | /
+                 |/          |/
+
+S-R Latch
+
+Capability to force output to 0 (reset when R=1)
+ or force output to be 1 (set when S=1)
+
+
+Simplified Truth Table for S-R Latch:
+
+  S  R  |  Q
+ -------|---------------------------------
+  0  0  | hold (keep current value of Q)
+  0  1  |  0 (reset)
+  1  0  |  1 (set)
+  1  1  | unstable...
+
+   ... race condition -- in practice, R or S changes first
+    and we have either the reset or set case above
+
+What's missing here is synchronization/control (via clock)
+
+
+
+Clock is used to ensure (wait long enough) for inputs R and S 
+                       _
+ and the outputs Q and Q to settle and have effect on the stored value
+
+
+
+
+
+TO DO: try to implement an S-R latch using two NAND gates instead
+
+

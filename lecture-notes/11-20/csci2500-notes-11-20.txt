@@ -1,0 +1,39 @@
+[11/20/2018]
+
+-- Today: 2 pm office hours (AE 112), then Thanksgiving break
+
+-------------------------------------------------------------------------
+
+Cache: 64 blocks, 16 bytes/block => 4 words/block
+Address: 1200 (base-10) if we think about the memory as byte-addressable.
+If we think about memory in terms of 4-word blocks, then block address: 1200 >> 4 = 1 * 2^6 + 1 * 2^3 + 1 * 2^1 + 1 * 2^0 = 64 + 8 + 2 + 1 = 75 = 1 * 2^6 + 11 = 64 + 11 = 75
+This block address would map to cache block 11 in a direct mapped cache.
+                         word offset byte offset
+                          (2 bits)    (2 bits)
+                               \      /
+          tag          index    offset
+       (22 bits)      (6 bits) (4 bits)
+0000000000000000000001 001011   0000  (binary)
+          1              11      0   (decimal)
+                         ^^
+                    Block Number
+
+
+Addresses 1200 to 1215 (decimal) would always be within the same block:
+0000000000000000000001 001011 0000
+0000000000000000000001 001011 0001
+0000000000000000000001 001011 0010
+0000000000000000000001 001011 0011
+0000000000000000000001 001011 0100
+0000000000000000000001 001011 0101
+0000000000000000000001 001011 0110
+0000000000000000000001 001011 0111
+0000000000000000000001 001011 1000
+0000000000000000000001 001011 1001
+0000000000000000000001 001011 1010
+0000000000000000000001 001011 1011
+0000000000000000000001 001011 1100
+0000000000000000000001 001011 1101
+0000000000000000000001 001011 1110
+0000000000000000000001 001011 1111
+I.e., would always be read from the main memory or written back to the main memory together.
